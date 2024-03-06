@@ -1,0 +1,62 @@
+default:
+  - dataloader: 
+  - model: 
+  - trainer: 
+
+trainer:
+  learning_rate: 0.001
+  epochs: 100
+  bs: 6
+  loss: l1_wav
+
+dataset:
+  paths:
+    speech: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/speech.wav"
+    music: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/music.wav"
+    sfx: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/sfx.wav"
+
+dataloader:
+  sample_rate: 
+    - 44100
+  n_samples: 44100
+  n_channels: 2
+  n_workers: 4
+  bs: 6
+
+evaluation:
+  paths:
+    speech: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/speech.wav"
+    music: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/music.wav"
+    sfx: "/mount/arbeitsdaten56/projekte/synthesis/dhyanitr/thesis/sound_demixing/train/**/sfx.wav"
+
+
+augmentations: 
+  _target_: audiomentations.Compose
+  transforms:
+    - _target_: audiomentations.Gain
+    - _target_: audiomentations.Clip
+
+
+
+model: 
+  _target_: mdx.models.resnet_subbandtime.ResUNet143_Subbandtime
+  input_channels: 2
+  output_channels: 2
+  target_sources_num: 3
+  resume_checkpoint_path: ""
+  name: CineDemixing
+  save_step_frequency: 50
+
+loss: l1_wav_l1_sp
+
+device: cuda:0
+timesteps: 100000
+seed: 1996
+debug: True
+checkpoints_dir: "checkpoint_path"
+comment: Some important comment needs to go here
+save_step_frequency: 50
+segment_samples: 44100  # Number of samples per segment
+evaluate_step_frequency: 10
+early_stop_steps: 10000
+precision: 32
