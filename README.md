@@ -14,7 +14,7 @@ The main aim of source-separation is to separate vocals and specific intruments 
 The project uses run-time augmentation method and some efficient modifications for different source separation backends. Please refer to the actual code for more info on the available backends. 
 
 ## Dataset
-For the course of training, the project only uses [DnR dataset](https://zenodo.org/records/6949108)[1]. 
+This repository can be used for training models for both tracks of SDX challenge. For the course of training, the project only uses [DnR dataset](https://zenodo.org/records/6949108)[1]. For training models for MDX track, the path in the train.yaml can be replaced with musDB18 dataset [2].
 
 
 ## Submission and results
@@ -84,6 +84,7 @@ For the final submission, best models for each stem were used for the submission
 
 ```bibtex
 [1] Petermann, D., Wichern, G., Wang, Z.-Q., & Le Roux, J. (2021). Divide and Remaster (DnR) (2.0)
+[2] Rafii, Z., Liutkus, A., Stöter, F.R., Mimilakis, S., & Bittner, R.. (2019). MUSDB18-HQ - an uncompressed version of MUSDB18.
 ```
 
 ## Cite
@@ -96,6 +97,5 @@ For the final submission, best models for each stem were used for the submission
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Thanatoz-1/SoundDemixing2023}},
-  commit = {4f57d6a0e4c030202a07a60bc1bb1ed1544bf679}
 }
 ```
